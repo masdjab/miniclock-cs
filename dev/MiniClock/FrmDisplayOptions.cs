@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Praja.Forms;
 
 namespace MiniClock
 {
@@ -62,7 +63,7 @@ namespace MiniClock
       );
 
       if (confirm == DialogResult.Yes) {
-        var options = DisplayOptions.CreateDefaultOptions();
+        var options = DisplayOptions.CreateDefaultOptions(this.Owner);
         TxtFormat.Text = options.DisplayFormat;
         TxtPaddingLeft.Text = options.Padding.Left.ToString();
         TxtPaddingRight.Text = options.Padding.Right.ToString();
@@ -121,7 +122,7 @@ namespace MiniClock
       TxtWidth.Text = Options.FormSize.Width.ToString();
       TxtHeight.Text = Options.FormSize.Height.ToString();
 
-      FormHelper.DrawHorizontalLine(this.CreateGraphics(), 0, this.ClientRectangle.Width, this.ClientRectangle.Height - 80, 1);
+      FormHelper.DrawHorizontalDblLine(this.CreateGraphics(), 0, this.ClientRectangle.Width, this.ClientRectangle.Height - 80, 1);
     }
 
     public FrmDisplayOptions(DisplayOptions options)
