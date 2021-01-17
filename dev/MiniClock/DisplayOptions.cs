@@ -9,6 +9,7 @@ namespace MiniClock
   public class DisplayOptions
   {
 
+    public Point FormLocation { get; set; }
     public Size FormSize { get; set; }
     public Color ForeColor { get; set; }
     public Color BackColor { get; set; }
@@ -24,7 +25,7 @@ namespace MiniClock
       using (RegistryKey key = Registry.CurrentUser.OpenSubKey(subkey, true)) {
         if (key != null) {
           if(value) {
-            key.SetValue("MiniClock", Application.ExecutablePath);
+            key.SetValue("MiniClock", Application.ExecutablePath.Replace("/", "\\"));
           }
           else {
             key.DeleteValue("MiniClock");
@@ -37,16 +38,17 @@ namespace MiniClock
     {
       var path = @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run";
       var entry = (string) Registry.GetValue(path, "MiniClock", "");
-      return entry == Application.ExecutablePath;
+      return entry == Application.ExecutablePath.Replace("/", "\\");
     }
 
-    public static DisplayOptions CreateDefaultOptions()
+    public static DisplayOptions CreateDefaultOptions(Form owner)
     {
       var options = new DisplayOptions();
-      options.FormSize = new Size(105, 16);
+      options.FormLocation = new Point((Screen.GetWorkingArea(owner).Width - 104) / 2, 0);
+      options.FormSize = new Size(104, 16);
       options.Padding = new Padding(2, 0, 2, 0);
       options.ForeColor = Color.Black;
-      options.BackColor = Color.White;
+      options.BackColor = Color.FromArgb(255, 255, 0);
       options.DisplayFont = new Font("Tahoma", 8, FontStyle.Regular);
       options.DisplayFormat = "HH:mm:ss  ddd (dd)";
       options.LockPosition = true;
@@ -57,6 +59,7 @@ namespace MiniClock
 
     public static DisplayOptions FromDict(Dictionary<string, object> dict)
     {
+      var form_location = (Dictionary<string, object>)dict["form_location"];
       var form_size = (Dictionary<string, object>)dict["form_size"];
       var padding = (Dictionary<string, object>)dict["padding"];
       var font_options = (Dictionary<string, object>)dict["display_font"];
@@ -69,9 +72,10 @@ namespace MiniClock
         | (font_underline ? FontStyle.Underline : FontStyle.Regular);
 
       var options = new DisplayOptions();
+      options.FormLocation = new Point((int)((double)form_location["x"]), (int)((double)form_location["y"]));
       options.FormSize = new Size((int)((double)form_size["width"]), (int)((double)form_size["height"]));
-      options.ForeColor = ConversionUtils.ColorFromHex((string)dict["fore_color"]);
-      options.BackColor = ConversionUtils.ColorFromHex((string)dict["back_color"]);
+      options.ForeColor = Conversion.ColorFromHex((string)dict["fore_color"]);
+      options.BackColor = Conversion.ColorFromHex((string)dict["back_color"]);
       options.Padding = new Padding(
         (int)((double)padding["left"]), 
         (int)((double)padding["top"]), 
@@ -88,6 +92,10 @@ namespace MiniClock
 
     public static Dictionary<string, object> ToDict(DisplayOptions options)
     {
+      var form_location = new Dictionary<string, object>();
+      form_location.Add("x", options.FormLocation.X);
+      form_location.Add("y", options.FormLocation.Y);
+
       var form_size = new Dictionary<string, object>();
       form_size.Add("width", (object)options.FormSize.Width);
       form_size.Add("height", (object)options.FormSize.Height);
@@ -106,10 +114,11 @@ namespace MiniClock
       padding.Add("bottom", options.Padding.Bottom);
 
       var dict = new Dictionary<string, object>();
+      dict.Add("form_location", (object)form_location);
       dict.Add("form_size", (object)form_size);
       dict.Add("display_font", (object)display_font);
-      dict.Add("fore_color", (object)ConversionUtils.ColorToHex(options.ForeColor));
-      dict.Add("back_color", (object)ConversionUtils.ColorToHex(options.BackColor));
+      dict.Add("fore_color", (object)Conversion.ColorToHex(options.ForeColor));
+      dict.Add("back_color", (object)Conversion.ColorToHex(options.BackColor));
       dict.Add("padding", (object)padding);
       dict.Add("display_format", (object)options.DisplayFormat);
       dict.Add("lock_position", (object)options.LockPosition);

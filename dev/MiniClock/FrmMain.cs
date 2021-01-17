@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Praja.Lib;
+using Praja.Forms;
 
 namespace MiniClock
 {
@@ -132,6 +134,8 @@ namespace MiniClock
     private void FrmMain_MouseUp(object sender, MouseEventArgs e)
     {
       IsMouseDown = false;
+      DisplayOptions.FormLocation = this.Location;
+      SaveConfig(DisplayOptions);
     }
 
     private void FrmMain_Load(object sender, EventArgs e)
@@ -139,27 +143,36 @@ namespace MiniClock
       FormHelper.SetWindowPos(this.Handle, FormHelper.HWND_TOPMOST, 0, 0, 0, 0, FormHelper.TOPMOST_FLAGS);
     }
 
+    private string GetAppConfigFilename()
+    {
+      return Praja.Lib.Environment.GetLocalAppDataPath() + "config.json";
+    }
+
     private DisplayOptions LoadConfig()
     {
-      var default_options = DisplayOptions.ToDict(DisplayOptions.CreateDefaultOptions());
-      var options_dict = (new AppConfig()).LoadConfig("config.json", default_options);
+      var config_file = GetAppConfigFilename();
+      var default_options = DisplayOptions.ToDict(DisplayOptions.CreateDefaultOptions(this));
+      var options_dict = (new AppConfigJson()).LoadConfig(config_file, default_options);
       return DisplayOptions.FromDict(options_dict);
     }
 
     private void SaveConfig(DisplayOptions options)
     {
-      (new AppConfig()).SaveConfig("config.json", DisplayOptions.ToDict(options));
+      var config_file = GetAppConfigFilename();
+      (new AppConfigJson()).SaveConfig(config_file, DisplayOptions.ToDict(options));
     }
 
     public FrmMain()
     {
+      Praja.Lib.Environment.CreateLocalAppDataPath();
+
       InitializeComponent();
 
       DisplayOptions = LoadConfig();
       DisplayOptions.AutoStart = DisplayOptions.GetAutoStart();
 
       this.Top = 0;
-      this.Location = new Point((Screen.GetWorkingArea(this).Width - this.Width) / 2, 0);
+      this.Location = DisplayOptions.FormLocation;
       this.Size = DisplayOptions.FormSize;
       this.Font = DisplayOptions.DisplayFont;
       this.BackColor = DisplayOptions.BackColor;
