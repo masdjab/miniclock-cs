@@ -12,6 +12,16 @@ namespace MiniClock
     private bool IsMouseDown = false;
     private Point MoveFrom = new Point(0, 0);
 
+    // prevent the form from showing in the alt-tab list
+    protected override CreateParams CreateParams {
+      get {
+        CreateParams cp = base.CreateParams;
+        // turn on WS_EX_TOOLWINDOW style bit
+        cp.ExStyle |= 0x80;
+        return cp;
+      }
+    }
+
     private void MnuChangeFont_Click(object sender, EventArgs e)
     {
       var dlg = new FontDialog();
@@ -51,7 +61,6 @@ namespace MiniClock
         this.Refresh();
       }
     }
-
 
     private void MnuDisplayOptions_Click(object sender, EventArgs e)
     {

@@ -37,11 +37,11 @@
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.MnuDisplayOptions = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+      this.MnuAutoStart = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.MnuLockPosition = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
       this.MnuExit = new System.Windows.Forms.ToolStripMenuItem();
-      this.MnuAutoStart = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.MnuContext.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -106,6 +106,18 @@
       this.toolStripSeparator2.Name = "toolStripSeparator2";
       this.toolStripSeparator2.Size = new System.Drawing.Size(181, 6);
       // 
+      // MnuAutoStart
+      // 
+      this.MnuAutoStart.Name = "MnuAutoStart";
+      this.MnuAutoStart.Size = new System.Drawing.Size(184, 22);
+      this.MnuAutoStart.Text = "&Auto Start";
+      this.MnuAutoStart.Click += new System.EventHandler(this.MnuAutoStart_Click);
+      // 
+      // toolStripSeparator4
+      // 
+      this.toolStripSeparator4.Name = "toolStripSeparator4";
+      this.toolStripSeparator4.Size = new System.Drawing.Size(181, 6);
+      // 
       // MnuLockPosition
       // 
       this.MnuLockPosition.Name = "MnuLockPosition";
@@ -125,18 +137,6 @@
       this.MnuExit.Text = "E&xit";
       this.MnuExit.Click += new System.EventHandler(this.MnuExit_Click);
       // 
-      // MnuAutoStart
-      // 
-      this.MnuAutoStart.Name = "MnuAutoStart";
-      this.MnuAutoStart.Size = new System.Drawing.Size(184, 22);
-      this.MnuAutoStart.Text = "&Auto Start";
-      this.MnuAutoStart.Click += new System.EventHandler(this.MnuAutoStart_Click);
-      // 
-      // toolStripSeparator4
-      // 
-      this.toolStripSeparator4.Name = "toolStripSeparator4";
-      this.toolStripSeparator4.Size = new System.Drawing.Size(181, 6);
-      // 
       // FrmMain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -145,6 +145,8 @@
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.MinimumSize = new System.Drawing.Size(10, 10);
       this.Name = "FrmMain";
+      this.ShowIcon = false;
+      this.ShowInTaskbar = false;
       this.Text = "MiniClock";
       this.Load += new System.EventHandler(this.FrmMain_Load);
       this.Paint += new System.Windows.Forms.PaintEventHandler(this.FrmMain_Paint);
