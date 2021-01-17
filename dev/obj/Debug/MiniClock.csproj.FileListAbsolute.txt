@@ -23,3 +23,17 @@ D:\Yudi\Dev\C#\MiniClock\dev\MiniClock\bin\Debug\Json.dll
 D:\Yudi\Dev\C#\MiniClock\dev\MiniClock\bin\Debug\Praja.Core.dll
 D:\Yudi\Dev\C#\MiniClock\dev\MiniClock\bin\Debug\Json.pdb
 D:\Yudi\Dev\C#\MiniClock\dev\MiniClock\bin\Debug\Praja.Core.pdb
+D:\Yudi\Dev\C#\MiniClock\dev\bin\Debug\MiniClock.exe.config
+D:\Yudi\Dev\C#\MiniClock\dev\obj\Debug\MiniClock.exe
+D:\Yudi\Dev\C#\MiniClock\dev\obj\Debug\MiniClock.pdb
+D:\Yudi\Dev\C#\MiniClock\dev\bin\Debug\MiniClock.exe
+D:\Yudi\Dev\C#\MiniClock\dev\bin\Debug\MiniClock.pdb
+D:\Yudi\Dev\C#\MiniClock\dev\bin\Debug\Json.dll
+D:\Yudi\Dev\C#\MiniClock\dev\bin\Debug\Praja.Core.dll
+D:\Yudi\Dev\C#\MiniClock\dev\bin\Debug\Json.pdb
+D:\Yudi\Dev\C#\MiniClock\dev\bin\Debug\Praja.Core.pdb
+D:\Yudi\Dev\C#\MiniClock\dev\obj\Debug\MiniClock.csprojResolveAssemblyReference.cache
+D:\Yudi\Dev\C#\MiniClock\dev\obj\Debug\MiniClock.FrmDisplayOptions.resources
+D:\Yudi\Dev\C#\MiniClock\dev\obj\Debug\MiniClock.FrmMain.resources
+D:\Yudi\Dev\C#\MiniClock\dev\obj\Debug\MiniClock.Properties.Resources.resources
+D:\Yudi\Dev\C#\MiniClock\dev\obj\Debug\MiniClock.csproj.GenerateResource.Cache
