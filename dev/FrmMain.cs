@@ -22,6 +22,11 @@ namespace MiniClock
       }
     }
 
+    private void SetAlwaysOnTop()
+    {
+      FormHelper.SetWindowPos(this.Handle, FormHelper.HWND_TOPMOST, 0, 0, 0, 0, FormHelper.TOPMOST_FLAGS);
+    }
+
     private void MnuChangeFont_Click(object sender, EventArgs e)
     {
       var dlg = new FontDialog();
@@ -118,6 +123,7 @@ namespace MiniClock
 
     private void TmrTime_Tick(object sender, EventArgs e)
     {
+      SetAlwaysOnTop();
       this.Refresh();
     }
 
@@ -149,7 +155,7 @@ namespace MiniClock
 
     private void FrmMain_Load(object sender, EventArgs e)
     {
-      FormHelper.SetWindowPos(this.Handle, FormHelper.HWND_TOPMOST, 0, 0, 0, 0, FormHelper.TOPMOST_FLAGS);
+      SetAlwaysOnTop();
     }
 
     private string GetAppConfigFilename()
